@@ -33,24 +33,44 @@ const App = () => {
           }
         }
       }
-      for (let element of data) {
+      for (let i = 0; i < data.length; i++) {
         let weatherLists = {};
-
-        for (let hourlyElement of element.hourly) {
-          if (weatherLists[hourlyElement.weather[0].main]) {
-            weatherLists[hourlyElement.weather[0].main] += 1;
+        let temp_max = [];
+        let temp_min = [];
+        for (let hourlyElement of data[i].hourly) {
+          if (weatherLists[hourlyElement.weather[0].main] === undefined) {
+            weatherLists[hourlyElement.weather[0].main] = 1;
           } else {
-            weatherLists = {
-              ...weatherLists,
-              [hourlyElement.weather[0].main]: 1,
-            };
+            weatherLists[hourlyElement.weather[0].main] =
+              weatherLists[hourlyElement.weather[0].main] + 1;
           }
+          temp_max.push(hourlyElement.main.temp_max);
+          temp_min.push(hourlyElement.main.temp_min);
         }
+        console.log(temp_max);
+        let max = Object.keys(weatherLists).reduce((a, b) =>
+          weatherLists[a] > weatherLists[b] ? a : b
+        );
+
+        data[i].main = max;
+        data[i].maxDegrees = [
+          temp_max[0],
+          temp_max[Math.round(temp_max.length / 2) - 1],
+          temp_max[temp_max.length - 1],
+        ];
+        data[i].minDegrees = [
+          temp_min[0] ,
+            temp_min[Math.round(temp_min.length / 2) - 1] ,
+            temp_min[temp_min.length - 1],
+        ];
       }
 
       setWeatherList(data);
+      console.log(data);
     });
   }, []);
+
+  console.log(weatherList);
   return (
     <Container>
       <Routes>

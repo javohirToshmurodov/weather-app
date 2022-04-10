@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Wrapper } from "./styles/components";
 const WeatherDaily = (props) => {
+  console.log(props.maxDegrees);
   return (
     <StyledWrapper>
       <p className="date">{props.date} </p>
@@ -15,18 +16,21 @@ const WeatherDaily = (props) => {
           src={`http://openweathermap.org/img/wn/${props.icon}.png`}
           alt="weather-icon"
         />
-        -    
+        -
         <img
           src={`http://openweathermap.org/img/wn/${props.icon}.png`}
           alt="weather-icon"
         />
       </div>
       <div className="weather-title">
-        <p>{props.title}</p>
+        <p>{props.main}</p>
       </div>
       <div className="degree">
-        <p className="max">19° - 21° - 18°</p>
-        <p className="min">12° - 15° - 11°</p>
+        <p className="max">{props.maxDegrees[0]}° - {props.maxDegrees[1]}° - {props.maxDegrees[2]}°</p>
+
+      </div>
+      <div className="degree">
+        <p className="min">{props.minDegrees[0]}° - {props.minDegrees[1]}° - {props.minDegrees[2]}°</p>
       </div>
     </StyledWrapper>
   );
@@ -49,11 +53,13 @@ const StyledWrapper = styled(Wrapper)`
     align-items: center;
   }
   .degree {
-    flex-direction: column;
+    display: flex;
   }
   .min,
   .max {
-    font-size: 18px;
-    margin: 5px;
+    font-size: 15px;
+  }
+  .weather-title p {
+    margin: 0 0 40px 0;
   }
 `;

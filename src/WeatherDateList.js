@@ -11,7 +11,13 @@ export const WeatherDateList = (props) => {
       <WeatherListWrapper>
         {props.weatherList.map((e, i) => (
           <Link to={`/${e.date}`} key={i} onClick={() => console.log(e)}>
-            <WeatherDaily date={e.date} icon={e.hourly[0].weather[0].icon} />
+            <WeatherDaily
+              date={e.date}
+              icon={e.hourly[0].weather[0].icon}
+              main={e.main}
+              maxDegrees={e.maxDegrees}
+              minDegrees={e.minDegrees}
+            />
           </Link>
         ))}
       </WeatherListWrapper>
