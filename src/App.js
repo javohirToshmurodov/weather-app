@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import styled from "styled-components";
 import { api } from "./axios";
 import { Container } from "./styles/components";
-import Weather from "./Weather";
-
+import { Link, Route, Routes } from "react-router-dom";
+import { WeatherDateList } from "./WeatherDateList";
+import WeatherHourly from "./WeatherHourly";
 const App = () => {
   const [weatherList, setWeatherList] = useState([]);
   useEffect(() => {
@@ -12,10 +14,9 @@ const App = () => {
 
       let response = res.data.list;
       let data = [];
-
+      console.log(data);
       for (const i of response) {
         let date = i.dt_txt.substring(5, 10);
-        console.log(date);
         if (data.filter((e) => e.date === date).length === 0) {
           data.push({ date: date });
         }
@@ -32,20 +33,36 @@ const App = () => {
           }
         }
       }
-      console.log(data);
+      for (let element of data) {
+        let weatherLists = {};
+
+        for (let hourlyElement of element.hourly) {
+          if (weatherLists[hourlyElement.weather[0].main]) {
+            weatherLists[hourlyElement.weather[0].main] += 1;
+          } else {
+            weatherLists = {
+              ...weatherLists,
+              [hourlyElement.weather[0].main]: 1,
+            };
+          }
+        }
+      }
+
+      setWeatherList(data);
     });
   }, []);
   return (
     <Container>
-      {weatherList.map((item, index) => (
-        <Weather
-          key={index}
-          date={item.dt_txt}
-          icon={item.weather[0].icon}
-          max={item.main.temp_max}
-          min={item.main.temp_min}
+      <Routes>
+        <Route
+          path="/"
+          element={<WeatherDateList weatherList={weatherList} />}
         />
-      ))}
+        <Route
+          path="/:date"
+          element={<WeatherHourly weatherList={weatherList} />}
+        />
+      </Routes>
     </Container>
   );
 };

@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   border-radius: 28px;
   transition: all 0.3s ease;
   &:hover {
-    box-shadow: inset 20px 20px 20px #162f5b, inset -20px -20px 20px #162f5b;
+    box-shadow: inset 40px 40px 40px #162f5b, inset -40px -40px 40px #162f5b;
   }
   color: #2ce8cb;
   backdrop-filter: blur(8.3px);
@@ -16,16 +16,19 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  .weather-title{
+    margin-top: -13px;
+  }
   .degree {
     display: flex;
     gap: 10px;
     font-size: 24px;
     margin-top: -30px;
     .max {
-      color: rgba(0, 0, 0, 0.7);
+      color:white;
     }
     .min {
-      color: rgba(0, 0, 0, 0.3);
+      color:white;
     }
   }
   .date {
