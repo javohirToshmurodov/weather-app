@@ -1,4 +1,4 @@
-import  {Wrapper}  from "./styles/components";
+import  {Wrapper}  from "../styles";
 const Weather = (props) => {
   return (
     <Wrapper>

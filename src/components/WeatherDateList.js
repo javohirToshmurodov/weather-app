@@ -3,20 +3,22 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import WeatherDaily from "./WeatherDaily";
 import { Title } from "./WeatherHourly";
-
-export const WeatherDateList = (props) => {
+import { useSelector } from "react-redux";
+export const WeatherDateList = () => {
+  const forecast = useSelector((state) => state.global.forecast);
   return (
     <>
-      <Title>{props.weatherList.length} days Forecast</Title>
+      <Title>{forecast.length} days Forecast</Title>
       <WeatherListWrapper>
-        {props.weatherList.map((e, i) => (
-          <Link to={`/${e.date}`} key={i} onClick={() => console.log(e)}>
+        {forecast.map((e, i) => (
+          <Link to={`/${e.date}`} key={i}>
             <WeatherDaily
               date={e.date}
               icon={e.hourly[0].weather[0].icon}
               main={e.main}
               maxDegrees={e.maxDegrees}
               minDegrees={e.minDegrees}
+              icons={e.icons}
             />
           </Link>
         ))}

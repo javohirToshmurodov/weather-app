@@ -1,24 +1,23 @@
 import styled from "styled-components";
-import { Wrapper } from "./styles/components";
+import { Wrapper } from "../styles"
 const WeatherDaily = (props) => {
-  console.log(props.maxDegrees);
   return (
     <StyledWrapper>
       <p className="date">{props.date} </p>
 
       <div className="weather-images">
         <img
-          src={`http://openweathermap.org/img/wn/${props.icon}.png`}
+          src={`http://openweathermap.org/img/wn/${props?.icons[0]}.png`}
           alt="weather-icon"
         />
         -
         <img
-          src={`http://openweathermap.org/img/wn/${props.icon}.png`}
+          src={`http://openweathermap.org/img/wn/${props?.icons[1]}.png`}
           alt="weather-icon"
         />
         -
         <img
-          src={`http://openweathermap.org/img/wn/${props.icon}.png`}
+          src={`http://openweathermap.org/img/wn/${props?.icons[2]}.png`}
           alt="weather-icon"
         />
       </div>
