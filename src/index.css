@@ -4,28 +4,17 @@ body {
   font-family: "Quicksand", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: linear-gradient(
-    to right bottom,
-    #712d54,
-    #662f5b,
-    #593260,
-    #4a3463,
-    #3a3664,
-    #2b3a64,
-    #1b3d62,
-    #0c3f5e,
-    #0d4358,
-    #1b4551,
-    #28474b,
-    #354847
-  );
+  background: linear-gradient(#123, #111);
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-::selection{
+::selection {
   background: goldenrod;
   color: white;
 }

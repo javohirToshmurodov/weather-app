@@ -72,14 +72,19 @@ export const fetchForecast = createAsyncThunk(
 
 const initialState = {
   forecast: [],
+  loading: false,
 };
 const globalSlice = createSlice({
   name: "global",
   initialState,
   reducers: {},
   extraReducers: {
+    [fetchForecast.pending]: (state) => {
+      state.loading = true;
+    },
     [fetchForecast.fulfilled]: (state, action) => {
       state.forecast = action.payload;
+      state.loading = false;
     },
   },
 });

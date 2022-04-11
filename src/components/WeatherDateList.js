@@ -4,25 +4,34 @@ import styled from "styled-components";
 import WeatherDaily from "./WeatherDaily";
 import { Title } from "./WeatherHourly";
 import { useSelector } from "react-redux";
+import { Loader } from "./Loader";
 export const WeatherDateList = () => {
   const forecast = useSelector((state) => state.global.forecast);
+  const loading = useSelector((state) => state.global.loading);
+  console.log(forecast);
   return (
     <>
-      <Title>{forecast.length} days Forecast</Title>
-      <WeatherListWrapper>
-        {forecast.map((e, i) => (
-          <Link to={`/${e.date}`} key={i}>
-            <WeatherDaily
-              date={e.date}
-              icon={e.hourly[0].weather[0].icon}
-              main={e.main}
-              maxDegrees={e.maxDegrees}
-              minDegrees={e.minDegrees}
-              icons={e.icons}
-            />
-          </Link>
-        ))}
-      </WeatherListWrapper>
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <Title>{forecast.length} days Forecast</Title>
+          <WeatherListWrapper>
+            {forecast.map((e, i) => (
+              <Link to={`/${e.date}`} key={i}>
+                <WeatherDaily
+                  date={e.date}
+                  icon={e.hourly[0].weather[0].icon}
+                  main={e.main}
+                  maxDegrees={e.maxDegrees}
+                  minDegrees={e.minDegrees}
+                  icons={e.icons}
+                />
+              </Link>
+            ))}
+          </WeatherListWrapper>
+        </>
+      )}
     </>
   );
 };

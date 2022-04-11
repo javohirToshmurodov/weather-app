@@ -40,6 +40,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  flex-direction: column;
   gap: 10px;
-  padding: 20px 0;
+  padding: 20px 30px;
 `;

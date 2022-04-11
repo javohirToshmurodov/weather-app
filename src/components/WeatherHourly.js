@@ -3,10 +3,12 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Weather from "./Weather";
+import { Loader } from "./Loader";
 const WeatherHourly = (props) => {
   const { date } = useParams();
   const [hourly, setHourly] = useState([]);
   const forecast = useSelector((state) => state.global.forecast);
+  const loading = useSelector((state) => state.global.loading);
 
   useEffect(() => {
     const data = forecast.filter((item) => item.date === date);
@@ -15,19 +17,25 @@ const WeatherHourly = (props) => {
 
   return (
     <>
-      <Title>Hourly of {date}</Title>
-      <WeatherWrapper>
-        {hourly?.map((item, index) => (
-          <Weather
-            key={index}
-            date={item.dt_txt.substring(10, 19)}
-            icon={item.weather[0].icon}
-            max={item.main.temp_max}
-            min={item.main.temp_min}
-            title={item.weather[0].main}
-          />
-        ))}
-      </WeatherWrapper>
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <Title>Hourly of {date}</Title>
+          <WeatherWrapper>
+            {hourly?.map((item, index) => (
+              <Weather
+                key={index}
+                date={item.dt_txt.substring(10, 19)}
+                icon={item.weather[0].icon}
+                max={item.main.temp_max}
+                min={item.main.temp_min}
+                title={item.weather[0].main}
+              />
+            ))}
+          </WeatherWrapper>
+        </>
+      )}
     </>
   );
 };
