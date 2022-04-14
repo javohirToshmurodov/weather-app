@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Weather from "./Weather";
 import { Loader } from "./Loader";
@@ -9,7 +9,7 @@ const WeatherHourly = (props) => {
   const [hourly, setHourly] = useState([]);
   const forecast = useSelector((state) => state.global.forecast);
   const loading = useSelector((state) => state.global.loading);
-
+  let navigate = useNavigate();
   useEffect(() => {
     const data = forecast.filter((item) => item.date === date);
     setHourly(data[0]?.hourly);
@@ -21,7 +21,10 @@ const WeatherHourly = (props) => {
         <Loader />
       ) : (
         <>
-          <Title>Hourly of {date}</Title>
+          <Header>
+            <Button onClick={() => navigate("/")}>Back</Button>
+            <Title>Hourly of {date}</Title>
+          </Header>
           <WeatherWrapper>
             {hourly?.map((item, index) => (
               <Weather
@@ -52,4 +55,22 @@ export const Title = styled.h1`
   text-align: center;
   font-size: 48px;
   color: white;
+`;
+
+export const Header = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+  /* padding:0 70px; */
+`;
+
+const Button = styled.button`
+  font-size: 22px;
+  padding: 5px 15px;
+  border-radius: 8px;
+  border: 1px solid white;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
 `;

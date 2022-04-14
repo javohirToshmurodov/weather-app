@@ -19,7 +19,7 @@ const App = () => {
         <Route path="/" element={<WeatherDateList />} />
         <Route path="/:date" element={<WeatherHourly />} />
       </Routes>
-    </Container>
+    </Container>  
   );
 };
 

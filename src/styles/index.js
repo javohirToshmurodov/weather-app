@@ -10,7 +10,8 @@ export const Wrapper = styled.div`
   }
   color: #2ce8cb;
   backdrop-filter: blur(8.3px);
-  width: 300px;
+  width: 18%;
+  min-width: 220px;
   height: 200px;
   display: flex;
   justify-content: center;

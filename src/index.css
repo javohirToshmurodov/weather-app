@@ -4,10 +4,24 @@ body {
   font-family: "Quicksand", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(#123, #111);
+  /* background: linear-gradient(#123, #111); */
   min-height: 100vh;
-  overflow: hidden;
   position: relative;
+  background-image: linear-gradient(
+    to right bottom,
+    #671645,
+    #59204d,
+    #4b2852,
+    #3d2d52,
+    #31304f,
+    #2b3652,
+    #273b54,
+    #254054,
+    #224b5c,
+    #205662,
+    #256166,
+    #2f6b67
+  );
 }
 
 code {

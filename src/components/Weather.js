@@ -1,5 +1,6 @@
 import  {Wrapper}  from "../styles";
 const Weather = (props) => {
+  
   return (
     <Wrapper>
       <p className="date">{props.date} </p>
